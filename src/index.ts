@@ -48,7 +48,8 @@ export function addGoogleCodeExecutionToPayload(api: Api | undefined, payload: u
 		return payload;
 	}
 
-	const tools = Array.isArray(payload.tools) ? payload.tools : [];
+	const payloadTools = payload["tools"];
+	const tools: unknown[] = Array.isArray(payloadTools) ? payloadTools : [];
 	const sanitizedTools = sanitizeTools(tools);
 
 	// Google function tools use `functionDeclarations`, not a `codeExecution` key,
