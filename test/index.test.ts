@@ -1,4 +1,4 @@
-import type { ExtensionAPI } from "@mariozechner/pi-coding-agent";
+import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
 import { afterEach, describe, expect, it } from "vitest";
 import googleCodeExecutionExtension, {
 	addGoogleCodeExecutionToPayload,
@@ -216,20 +216,13 @@ describe("isGoogleCodeExecutionEnabled", () => {
 		expect(isGoogleCodeExecutionEnabled()).toBe(true);
 	});
 
-	it.each([
-		"",
-		"0",
-		"false",
-		"no",
-		"off",
-		"garbage",
-		"enable",
-		"enabled",
-		"2",
-	])("returns false for falsy or unknown value %s", (value) => {
-		process.env[ENABLE_ENV] = value;
-		expect(isGoogleCodeExecutionEnabled()).toBe(false);
-	});
+	it.each(["", "0", "false", "no", "off", "garbage", "enable", "enabled", "2"])(
+		"returns false for falsy or unknown value %s",
+		(value) => {
+			process.env[ENABLE_ENV] = value;
+			expect(isGoogleCodeExecutionEnabled()).toBe(false);
+		},
+	);
 });
 
 describe("GOOGLE_CODE_EXECUTION_SECTION", () => {
